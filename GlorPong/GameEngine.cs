@@ -47,12 +47,12 @@ namespace GlorPong
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			var gameBoundaries = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
-			var paddleTexture = Content.Load<Texture2D>("Paddle");
+			var paddleTexture = Content.Load<Texture2D>("paddle");
 			var computerPaddleLocation = new Vector2(gameBoundaries.Width - paddleTexture.Width, 0);
 
 			playerPaddle = new Paddle(paddleTexture, Vector2.Zero, gameBoundaries, PlayerType.Human);
 			computerPaddle = new Paddle(paddleTexture, computerPaddleLocation, gameBoundaries, PlayerType.Computer);
-			ball = new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
+			ball = new Ball(Content.Load<Texture2D>("ball"), Vector2.Zero, gameBoundaries);
 			ball.AttachTo(playerPaddle);
 
 			gameObjects = new GameObjects
@@ -95,13 +95,12 @@ namespace GlorPong
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.AliceBlue);
 
 			spriteBatch.Begin();
 			playerPaddle.Draw(spriteBatch);
 			computerPaddle.Draw(spriteBatch);
 			ball.Draw(spriteBatch);
-			//spriteBatch.Draw(paddle, Vector2.Zero, Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);
