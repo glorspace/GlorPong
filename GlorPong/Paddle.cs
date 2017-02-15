@@ -28,9 +28,12 @@ namespace GlorPong
 		{
 			if (playerType == PlayerType.Computer)
 			{
-				if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y)
+				var rand = new Random();
+				var reactionThreshold = rand.Next(30, 130);
+
+				if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y + reactionThreshold)
 					Velocity = new Vector2(0, -10f);
-				if (gameObjects.Ball.Location.Y > Location.Y)
+				if (gameObjects.Ball.Location.Y > Location.Y + Height + reactionThreshold)
 					Velocity = new Vector2(0, 10f);
 			}
 			// Think about how I want this to actually work. This is a simple implementation that really just changes the direction.
