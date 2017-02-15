@@ -95,7 +95,7 @@ namespace GlorPong
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.AliceBlue);
+			GraphicsDevice.Clear(Color.BlanchedAlmond);
 
 			spriteBatch.Begin();
 			playerPaddle.Draw(spriteBatch);
