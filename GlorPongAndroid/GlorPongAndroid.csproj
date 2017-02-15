@@ -81,9 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\GlorPong\Content\ScoreText.xnb">
+    <AndroidAsset Include="..\GlorPong\Content\ScoreText.xnb">
       <Link>Content\ScoreText.xnb</Link>
-    </None>
+    </AndroidAsset>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -109,12 +109,12 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\GlorPong\Content\ball.png">
+    <AndroidAsset Include="..\GlorPong\Content\ball.png">
       <Link>Content\ball.png</Link>
-    </Content>
-    <Content Include="..\GlorPong\Content\paddle.png">
+    </AndroidAsset>
+    <AndroidAsset Include="..\GlorPong\Content\paddle.png">
       <Link>Content\paddle.png</Link>
-    </Content>
+    </AndroidAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
