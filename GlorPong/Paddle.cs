@@ -17,11 +17,7 @@ namespace GlorPong
 
 	public class Paddle : Sprite
 	{
-#if ANDROID
-		private const float PaddleSpeed = 10f;
-#else
-		private const float PaddleSpeed = 10f;
-#endif
+		private const float PaddleSpeed = 0.05f;
 		private PlayerType playerType;
 
 		public Paddle(Texture2D texture, Vector2 location, Rectangle screenSize, PlayerType playerType) : base(texture, location, screenSize)
@@ -46,10 +42,18 @@ namespace GlorPong
 			// in this implementation.
 			if (playerType == PlayerType.Human)
 			{
-				if (Keyboard.GetState().IsKeyDown(Keys.Left) || gameObjects.TouchInput.Up)
+#if HAS_KEYBOARD
+				if (Keyboard.GetState().IsKeyDown(Keys.Left))
+#else
+				if (gameObjects.TouchInput.Up)
+#endif
 					Velocity = new Vector2(0, -PaddleSpeed);
 
-				if (Keyboard.GetState().IsKeyDown(Keys.Right) || gameObjects.TouchInput.Down)
+#if HAS_KEYBOARD
+				if (Keyboard.GetState().IsKeyDown(Keys.Right))
+#else
+				if (gameObjects.TouchInput.Down)
+#endif
 					Velocity = new Vector2(0, PaddleSpeed);
 			}
 

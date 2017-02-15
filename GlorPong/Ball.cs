@@ -6,11 +6,7 @@ namespace GlorPong
 {
 	public class Ball : Sprite
 	{
-#if ANDROID
-		private const float BallSpeedX = 5f;
-#else
-		private const float BallSpeedX = 5f;
-#endif
+		private const float BallSpeedX = 0.02f;
 		private Paddle attachedToPaddle;
 
 		public Ball(Texture2D texture, Vector2 location, Rectangle screenSize) : base(texture, location, screenSize)
@@ -28,7 +24,11 @@ namespace GlorPong
 
 		public override void Update(GameTime gameTime, GameObjects gameObjects)
 		{
-			if ((Keyboard.GetState().IsKeyDown(Keys.Space) || gameObjects.TouchInput.Tapped) && attachedToPaddle != null)
+#if HAS_KEYBOARD
+			if (Keyboard.GetState().IsKeyDown(Keys.Space) && attachedToPaddle != null)
+#else
+			if (gameObjects.TouchInput.Tapped && attachedToPaddle != null)
+#endif
 			{
 				var newVelocity = new Vector2(BallSpeedX, attachedToPaddle.Velocity.Y * .75f);
 				Velocity = newVelocity;

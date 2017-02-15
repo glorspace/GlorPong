@@ -44,7 +44,7 @@ namespace GlorPong
 		}
 		public virtual void Update(GameTime gameTime, GameObjects gameObjects)
 		{
-			Location += Velocity;
+			Location += (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
 			CheckBounds();
 		}
