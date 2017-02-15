@@ -32,8 +32,8 @@ namespace GlorPong
 
 			if (attachedToPaddle != null)
 			{
-				Location.X = attachedToPaddle.Location.X + attachedToPaddle.Width;
-				Location.Y = attachedToPaddle.Location.Y;
+				Velocity = Vector2.Zero;
+				Location = new Vector2(attachedToPaddle.Location.X + attachedToPaddle.Width, attachedToPaddle.Location.Y);
 			}
 			else
 			{

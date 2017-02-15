@@ -16,7 +16,7 @@ namespace GlorPong
 		private Paddle playerPaddle;
 		private Paddle computerPaddle;
 		private Ball ball;
-		//private Texture2D paddle;
+		private Score score;
 
 		public GameEngine()
 		{
@@ -54,12 +54,14 @@ namespace GlorPong
 			computerPaddle = new Paddle(paddleTexture, computerPaddleLocation, gameBoundaries, PlayerType.Computer);
 			ball = new Ball(Content.Load<Texture2D>("ball"), Vector2.Zero, gameBoundaries);
 			ball.AttachTo(playerPaddle);
+			score = new Score(Content.Load<SpriteFont>("ScoreText"), gameBoundaries);
 
 			gameObjects = new GameObjects
 			{
 				PlayerPaddle = playerPaddle,
 				ComputerPaddle = computerPaddle,
-				Ball = ball
+				Ball = ball,
+				Score = score
 			};
 		}
 
@@ -85,6 +87,7 @@ namespace GlorPong
 			playerPaddle.Update(gameTime, gameObjects);
 			computerPaddle.Update(gameTime, gameObjects);
 			ball.Update(gameTime, gameObjects);
+			score.Update(gameTime, gameObjects);
 
 			base.Update(gameTime);
 		}
@@ -101,6 +104,7 @@ namespace GlorPong
 			playerPaddle.Draw(spriteBatch);
 			computerPaddle.Draw(spriteBatch);
 			ball.Draw(spriteBatch);
+			score.Draw(spriteBatch);
 			spriteBatch.End();
 
 			base.Draw(gameTime);

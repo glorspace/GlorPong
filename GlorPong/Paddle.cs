@@ -50,7 +50,7 @@ namespace GlorPong
 
 		protected override void CheckBounds()
 		{
-			Location.Y = MathHelper.Clamp(Location.Y, 0, gameBoundaries.Height - texture.Height);
+			Location = new Vector2(Location.X, MathHelper.Clamp(Location.Y, 0, gameBoundaries.Height - texture.Height));
 		}
 	}
 }

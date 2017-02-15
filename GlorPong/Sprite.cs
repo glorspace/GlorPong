@@ -7,7 +7,7 @@ namespace GlorPong
 	{
 		protected readonly Texture2D texture;
 		protected readonly Rectangle gameBoundaries;
-		public Vector2 Location;
+		public Vector2 Location	{ get; set;	}
 
 		public int Height
 		{
