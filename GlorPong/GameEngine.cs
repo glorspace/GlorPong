@@ -12,6 +12,12 @@ namespace GlorPong
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		private GameObjects gameObjects;
+		private Paddle playerPaddle;
+		private Paddle computerPaddle;
+		private Ball ball;
+		//private Texture2D paddle;
+
 		public GameEngine()
 		{
 			graphics = new GraphicsDeviceManager(this);
@@ -26,7 +32,7 @@ namespace GlorPong
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			IsMouseVisible = true;
 
 			base.Initialize();
 		}
@@ -40,7 +46,21 @@ namespace GlorPong
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			var gameBoundaries = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+			var paddleTexture = Content.Load<Texture2D>("Paddle");
+			var computerPaddleLocation = new Vector2(gameBoundaries.Width - paddleTexture.Width, 0);
+
+			playerPaddle = new Paddle(paddleTexture, Vector2.Zero, gameBoundaries, PlayerType.Human);
+			computerPaddle = new Paddle(paddleTexture, computerPaddleLocation, gameBoundaries, PlayerType.Computer);
+			ball = new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
+			ball.AttachTo(playerPaddle);
+
+			gameObjects = new GameObjects
+			{
+				PlayerPaddle = playerPaddle,
+				ComputerPaddle = computerPaddle,
+				Ball = ball
+			};
 		}
 
 		/// <summary>
@@ -62,7 +82,9 @@ namespace GlorPong
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
+			playerPaddle.Update(gameTime, gameObjects);
+			computerPaddle.Update(gameTime, gameObjects);
+			ball.Update(gameTime, gameObjects);
 
 			base.Update(gameTime);
 		}
@@ -75,7 +97,12 @@ namespace GlorPong
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			playerPaddle.Draw(spriteBatch);
+			computerPaddle.Draw(spriteBatch);
+			ball.Draw(spriteBatch);
+			//spriteBatch.Draw(paddle, Vector2.Zero, Color.White);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
